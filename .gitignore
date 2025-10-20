@@ -1,0 +1,25 @@
+# --- Compilação ---
+*.o
+*.out
+/clienteApp
+/ServidorApp
+
+# --- Logs e runtime ---
+logs/
+*.log
+
+# --- Ficheiros temporários e backups ---
+*~
+*.tmp
+*.bak
+*.swp
+.DS_Store
+
+# --- Caches de IDEs ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- Executáveis de testes ---
+a.out
+test
