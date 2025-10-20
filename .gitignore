@@ -2,7 +2,7 @@
 *.o
 *.out
 /clienteApp
-/ServidorApp
+/servidorApp
 
 # --- Logs e runtime ---
 logs/
