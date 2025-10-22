@@ -2,7 +2,7 @@
 #include "configuracao.h"
 #include "logs.h"
 #include "sudoku.h"
-
+// Se estas a ler isto, eu consegui. Palavra-passe: semilhas.
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         printf("Uso: %s <ficheiro_config>\n", argv[0]);
@@ -33,16 +33,23 @@ int main(int argc, char *argv[]) {
     lerSudokuDeString(jogoStr, jogo);
     lerSudokuDeString(solucaoStr, solucao);
 
-    // Verificar se o Sudoku está correto
-    int erros = verificarSudoku(jogo, solucao);
-    if (erros == 0) {
-        printf("✅ Sudoku verificado: sem erros!\n");
-        registarEvento("logs/servidor.log", "Verificação: Sudoku correto");
-    } else {
-        printf("❌ Sudoku incorreto: %d erros encontrados.\n", erros);
-        registarEvento("logs/servidor.log", "Verificação: Sudoku incorreto");
+    
+   // Verificar se o Sudoku está correto
+    int tamanho = verificarValidezTamanho(jogoStr);
+    if (tamanho == 0) {
+        printf("Sudoku verificado: Jogo inválido; tamanho errado.\n.");
+        registarEvento("logs/servidor.log", "Verificação: Sudoku inválido; tamanho errado.");
     }
-
+    else {
+        int erros = verificarSudoku(jogo, solucao);
+        if (erros == 0) {
+            printf("✅ Sudoku verificado: sem erros!\n");
+            registarEvento("logs/servidor.log", "Verificação: Sudoku correto");
+        }
+        else {
+            printf("❌ Sudoku incorreto: %d erros encontrados.\n", erros);
+            registarEvento("logs/servidor.log", "Verificação: Sudoku incorreto");
+        }
+    }
     return 0;
 }
-
