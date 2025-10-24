@@ -34,29 +34,21 @@ int main(int argc, char *argv[]) {
     lerSudokuDeString(solucaoStr, solucao);
 
     
-    // Verificar se o Sudoku está correto 
-    int tamanho = verificarValidezTamanho(solucaoStr);
-    int linhas = verificarValidezLinhas(solucaoStr);
-    int colunas = verificarValidezColunas(solucaoStr);
-
+    // Verificar se o Sudoku está correto
+    int tamanho = verificarValidezTamanho(jogoStr);
     if (tamanho == 0) {
-        printf("Sudoku verificado: Jogo inválido; Tamanho errado.\n.");
-        registarEvento("logs/servidor.log", "Verificação: Sudoku inválido; Tamanho errado.");
-    } else if (linhas == 0) {
-        printf("Sudoku verificado: Jogo inválido; Linhas erradas.\n.");
-        registarEvento("logs/servidor.log", "Verificação: Sudoku inválido; Linhas erradas.");
-    } else if (colunas == 0) {
-        printf("Sudoku verificado: Jogo inválido; Colunas erradas.\n.");
-        registarEvento("logs/servidor.log", "Verificação: Sudoku inválido; Colunas erradas.");
-    } else {
-    mostrarSudoku(jogo);
-    int erros = verificarSudoku(jogo, solucao);
+        printf("Sudoku verificado: Jogo inválido; tamanho errado.\n.");
+        registarEvento("logs/servidor.log", "Verificação: Sudoku inválido; tamanho errado.");
+    }
+    else {
+        int erros = verificarSudoku(jogo, solucao);
         if (erros == 0) {
             printf("✅ Sudoku verificado: sem erros!\n");
             registarEvento("logs/servidor.log", "Verificação: Sudoku correto");
-        } else {
-        printf("❌ Sudoku incorreto: %d erros encontrados.\n", erros);
-        registarEvento("logs/servidor.log", "Verificação: Sudoku incorreto.\n");
+        }
+        else {
+            printf("❌ Sudoku incorreto: %d erros encontrados.\n", erros);
+            registarEvento("logs/servidor.log", "Verificação: Sudoku incorreto");
         }
     }
     return 0;
